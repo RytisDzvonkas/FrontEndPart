@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program for the people</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <h1>Final Exam</h1>
+        <h2>People connection</h2>
+      </div>
+    </header>
+    <section class="wrapper">
+      <form id="user-form">
+        <label for="username">Username</label>
+        <input type="string" id="username" placeholder="Username">
+        <label for="password">Password</label>
+        <input type="string" id="password" name="password" placeholder="Your password">
+      </form>
+      <nav>
+        <div class="user-button-container">
+          <button type="submit" class="User-button">Login</button>
+        </div>
+        <div class="user-button-container">
+          <button class="user-button" href="register.html"> Register New User</button>
+        </div>
+      </nav>
+    </section>
+    <section class="wrapper">
+      <div id="users-container">
+        <!-- Generated user card -->
+      </div>
+    </section>
+  </body>
+</html>
