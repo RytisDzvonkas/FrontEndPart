@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <h1>User</h1>
+        <h2>Register a person</h2>
+      </div>
+    </header>
+    <section class="form-container wrapper">
+      <div>
+        <h3>Add User</h3>
+      </div>
+      <form id="user-form">
+        <label for="img">Profile Picture</label>
+        <input
+          src = "data:image/jpg;base64,"
+          type="img"
+          id="img"
+          name="img"
+          placeholder="https://www.google.com/logo"
+        />
+        <label for="name">Name</label>
+        <input type="string" id="name" name="name" placeholder="Name" />
+        <label for="surname">Surname</label>
+        <input type="string" id="surname" name="surname" placeholder="Surname"/>
+        <label for="personsCode">PersonsCode</label>
+        <input type="int" name="personsCode" id="personsCode" placeholder="123...">
+        <label for="phoneNumber">PhoneNumber</label>
+        <input type="int" name="phoneNumber" id="phoneNumber" placeholder="86...">
+        <label for="email">Email</label>
+        <input type="string" name="email" id="email" placeholder="email@email.com">
+        <button type="submit" href= "addResidence.html" class="UserButton">Register</button>
+      </form>
+      <div class="statusMessage">
+        <!-- display server Message -->
+      </div>
+    </section>
+    <script>
+      document.querySelector("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const image = document.getElementById("img").value;
+        const name = document.getElementById("personName").value;
+        const surname = document.getElementById("personSurname").value;
+        const personsCode = document.getElementById("personsCode").value;
+        const phoneNumber = document.getElementById("phoneNumber").value;
+        const email = document.getElementById("email").value;
+
+        const users = {
+          image: image,
+          name: name,
+          surname: surname,
+          personsCode: personsCode,
+          phoneNumber: phoneNumber,
+          email: email
+        };
+        fetch("https://localhost:7172/Person", {
+          method: "POST",
+          body: JSON.stringify(users),
+          headers: {
+            Accept: "text/json",
+            "Content-Type": "application/json",
+          },
+        }).then((res) => {
+          if (res.ok) {
+            alert("Uzklausa sekminga");
+            window.location.replace("index.html");
+          } else {
+            alert("Uzklausa nesekminga");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
