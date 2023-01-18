@@ -21,6 +21,8 @@ h3 {
 }
 nav {
   display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0rem;
 }
 .wrapper {
   width: 80%;
@@ -53,9 +55,14 @@ button:hover {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2.4rem;
+  text-decoration: none;
+}
+.login-button {
+  flex: flex;
+  align-items: center;
 }
 
-.user-button {
+.new-user-button {
   color: black;
   background-color: rgb(207, 113, 113);
   border: 1px solid black;
@@ -77,8 +84,8 @@ button:hover {
   height: 25rem;
 }
 .user-card img {
-  width: 100%;
-  height: auto;
+  width: 200px;
+  height: 200px;
 }
 .user-card h1 {
   margin: 0 1rem 2rem 1rem;
@@ -96,8 +103,6 @@ button:hover {
   margin-right: 15%;
   margin-top: 2rem;
   gap: 1rem;
-}
-#user-form {
   width: 10rem;
 }
 #user-form label {

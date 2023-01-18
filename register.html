@@ -13,11 +13,12 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
   </head>
   <body>
     <header>
       <div class="wrapper">
-        <h1>User</h1>
+        <h1>Add User</h1>
         <h2>Register a person</h2>
       </div>
     </header>
@@ -28,23 +29,56 @@
       <form id="user-form">
         <label for="img">Profile Picture</label>
         <input
-          src = "data:image/jpg;base64,"
-          type="img"
+          type="file"
+          name=""
           id="img"
-          name="img"
-          placeholder="https://www.google.com/logo"
+          onchange="imageUploaded()"
         />
+        <br /><br />
+        <button onclick="displayString()">Display String</button>
         <label for="name">Name</label>
-        <input type="string" id="name" name="name" placeholder="Name" />
+        <input
+          type="string"
+          id="name"
+          name="name"
+          placeholder="Name"
+          required
+        />
         <label for="surname">Surname</label>
-        <input type="string" id="surname" name="surname" placeholder="Surname"/>
+        <input
+          type="string"
+          id="surname"
+          name="surname"
+          placeholder="Surname"
+          required
+        />
         <label for="personsCode">PersonsCode</label>
-        <input type="int" name="personsCode" id="personsCode" placeholder="123...">
+        <input
+          type="int"
+          name="personsCode"
+          id="personsCode"
+          placeholder="123..."
+          required
+        />
         <label for="phoneNumber">PhoneNumber</label>
-        <input type="int" name="phoneNumber" id="phoneNumber" placeholder="86...">
+        <input
+          type="int"
+          name="phoneNumber"
+          id="phoneNumber"
+          placeholder="86..."
+          required
+        />
         <label for="email">Email</label>
-        <input type="string" name="email" id="email" placeholder="email@email.com">
-        <button type="submit" href= "addResidence.html" class="UserButton">Register</button>
+        <input
+          type="string"
+          name="email"
+          id="email"
+          placeholder="email@email.com"
+          required
+        />
+        <button type="submit" href="addResidence.html" class="UserButton">
+          Register
+        </button>
       </form>
       <div class="statusMessage">
         <!-- display server Message -->
@@ -54,8 +88,8 @@
       document.querySelector("form").addEventListener("submit", (e) => {
         e.preventDefault();
         const image = document.getElementById("img").value;
-        const name = document.getElementById("personName").value;
-        const surname = document.getElementById("personSurname").value;
+        const name = document.getElementById("name").value;
+        const surname = document.getElementById("surname").value;
         const personsCode = document.getElementById("personsCode").value;
         const phoneNumber = document.getElementById("phoneNumber").value;
         const email = document.getElementById("email").value;
@@ -66,7 +100,7 @@
           surname: surname,
           personsCode: personsCode,
           phoneNumber: phoneNumber,
-          email: email
+          email: email,
         };
         fetch("https://localhost:7172/Person", {
           method: "POST",
