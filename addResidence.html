@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <h1>Add User Residence</h1>
+        <h2>Register your residence</h2>
+      </div>
+    </header>
+    <section class="form-container wrapper">
+      <div>
+        <h3>Add Residence</h3>
+      </div>
+      <form id="user-form">
+        <label for="city">City</label>
+        <input
+          type="string"
+          id="city"
+          name="city"
+          placeholder="City"
+          required
+        />
+        <label for="street">Street</label>
+        <input
+          type="string"
+          id="street"
+          name="street"
+          placeholder="Street"
+          required
+        />
+        <label for="houseNumber">HouseNumber</label>
+        <input
+          type="int"
+          name="houseNumber"
+          id="houseNumber"
+          placeholder="123..."
+          required
+        />
+        <label for="flatNumber">FlatNumber</label>
+        <input
+          type="int"
+          name="flatNumber"
+          id="flatNumber"
+          placeholder="11..."
+          required
+        />
+        <button type="submit" href="existing-user.html" class="UserButton">
+          Register
+        </button>
+      </form>
+      <div class="statusMessage">
+        <!-- display server Message -->
+      </div>
+    </section>
+    <script>
+      document.querySelector("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const city = document.getElementById("city").value;
+        const street = document.getElementById("street").value;
+        const houseNumber = document.getElementById("houseNumber").value;
+        const flatNumber = document.getElementById("flatNumber").value;
+
+        const residences = {
+          city: city,
+          street: street,
+          houseNumber: houseNumber,
+          flatNumber: flatNumber,
+        };
+        fetch("https://localhost:7172/Person", {
+          method: "POST",
+          body: JSON.stringify(residences),
+          headers: {
+            Accept: "text/json",
+            "Content-Type": "application/json",
+          },
+        }).then((res) => {
+          if (res.ok) {
+            alert("Uzklausa sekminga");
+            window.location.replace("index.html");
+          } else {
+            alert("Uzklausa nesekminga");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
