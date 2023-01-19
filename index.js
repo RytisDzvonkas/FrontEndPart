@@ -4,18 +4,18 @@ const state = {};
 function fetchParameter(param) {
   fetch(`https://localhost:7172/${param}`)
     .then((res) => res.json())
-    .then((param) => {
-      renderFilterPerson([...new Set(param.map((name) => name.person))]);
-      renderPersonCards(param);
-      state.person = param;
+    .then((data) => {
+      renderFilterPerson([...new Set(data.map((entry) => entry.person))]);
+      renderPersonCards(data);
+      state.person = data;
     });
 }
 
 fetchParameter("Person");
 fetchParameter("Person/id");
 
-function renderFilterPerson(names) {
-  names.forEach((name) => {
+function renderFilterPerson(name) {
+  name.forEach((name) => {
     const filterButton = document.createElement("button");
     filterButton.innerText = name;
     const filterContainer = document.getElementById("filter-container");
@@ -61,8 +61,8 @@ function filterPerson(event) {
     event.target.classList.toggle("selected");
   }
 }
-
 let base64String = "";
+
 function imageUploaded() {
   var file = document.querySelector("input[type=file]")["files"][0];
   var reader = new FileReader();
@@ -79,3 +79,18 @@ function displayString() {
   console.log("Base64String about to be printed");
   alert(base64String);
 }
+
+function CheckUser(user) {
+  if (user.status == 404) {
+    document.getElementById("error-msg").innerText = "Bad login or password";
+  } else {
+    console.log(user);
+    sessionStorage.setItem("userId", user.id);
+    sessionStorage.setItem("role", user.role);
+    window.location.href = "userInfo.html";
+  }
+}
+
+document
+  .getElementById("filter-container")
+  .addEventListener("click", filterPerson);
