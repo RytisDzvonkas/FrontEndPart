@@ -13,7 +13,6 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="index.js" defer></script>
   </head>
   <body>
     <header>
@@ -71,7 +70,7 @@
           password: password,
           role: role,
         };
-        fetch("https://localhost:7172/Residence", {
+        fetch("https://localhost:7172/User", {
           method: "POST",
           body: JSON.stringify(users),
           headers: {
@@ -81,7 +80,7 @@
         }).then((res) => {
           if (res.ok) {
             alert("Uzklausa sekminga");
-            window.location.replace("index.html");
+            window.location.replace("register.html");
           } else {
             alert("Uzklausa nesekminga");
           }

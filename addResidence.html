@@ -67,36 +67,14 @@
         <!-- display server Message -->
       </div>
     </section>
-    <script>
-      document.querySelector("form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const city = document.getElementById("city").value;
-        const street = document.getElementById("street").value;
-        const houseNumber = document.getElementById("houseNumber").value;
-        const flatNumber = document.getElementById("flatNumber").value;
-
-        const residences = {
-          city: city,
-          street: street,
-          houseNumber: houseNumber,
-          flatNumber: flatNumber,
+    <script src="submit.js">
+      const users = {
+        city: document.getElementById("city").value,
+        street: document.getElementById("street").value,
+        houseNumber: document.getElementById("houseNumber").value,
+        flatNumber: document.getElementById("flatNumber").value,
         };
-        fetch("https://localhost:7172/Residence", {
-          method: "POST",
-          body: JSON.stringify(residences),
-          headers: {
-            Accept: "text/json",
-            "Content-Type": "application/json",
-          },
-        }).then((res) => {
-          if (res.ok) {
-            alert("Uzklausa sekminga");
-            window.location.replace("index.html");
-          } else {
-            alert("Uzklausa nesekminga");
-          }
-        });
-      });
+        submitData(users, "Residence", "index.html");
     </script>
   </body>
 </html>

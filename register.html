@@ -13,7 +13,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="index.js" defer></script>
+    <script src="register.js" defer></script>
   </head>
   <body>
     <header>
@@ -28,14 +28,9 @@
       </div>
       <form id="user-form">
         <label for="img">Profile Picture</label>
-        <input
-          type="file"
-          name=""
-          id="img"
-          onchange="imageUploaded()"
-        />
+        <input type="file" name="" id="img" onchange="imageUploaded()" />
         <br /><br />
-        <button onclick="displayString()">Display String</button>
+        <button onclick="displayString(event)">Display String</button>
         <label for="name">Name</label>
         <input
           type="string"
@@ -54,7 +49,7 @@
         />
         <label for="personsCode">PersonsCode</label>
         <input
-          type="int"
+          type="number"
           name="personsCode"
           id="personsCode"
           placeholder="123..."
@@ -62,7 +57,7 @@
         />
         <label for="phoneNumber">PhoneNumber</label>
         <input
-          type="int"
+          type="number"
           name="phoneNumber"
           id="phoneNumber"
           placeholder="86..."
@@ -76,8 +71,16 @@
           placeholder="email@email.com"
           required
         />
-        <button type="submit">
-          <a href="addResidence.html" class="UserButton">Register</a>
+        <label for="id">id</label>
+        <input
+          type="number"
+          name="id"
+          id="id"
+          placeholder="0"
+          required
+        />
+        <button type="submit" id="submitBtn">
+          <div class="UserButton">Register</div>
         </button>
       </form>
       <div class="statusMessage">
@@ -85,38 +88,18 @@
       </div>
     </section>
     <script>
-      document.querySelector("form").addEventListener("submit", (e) => {
+        document.querySelector("form").addEventListener("submit", (e) => {
         e.preventDefault();
-        const image = document.getElementById("img").value;
-        const name = document.getElementById("name").value;
-        const surname = document.getElementById("surname").value;
-        const personsCode = document.getElementById("personsCode").value;
-        const phoneNumber = document.getElementById("phoneNumber").value;
-        const email = document.getElementById("email").value;
-
         const users = {
-          image: image,
-          name: name,
-          surname: surname,
-          personsCode: personsCode,
-          phoneNumber: phoneNumber,
-          email: email,
+          profilePicture: base64String,
+          name: document.getElementById("name").value,
+          surname: document.getElementById("surname").value,
+          personsCode: parseInt(document.getElementById("personsCode").value),
+          phoneNumber: parseInt(document.getElementById("phoneNumber").value),
+          email: document.getElementById("email").value,
+          userid: document.getElementById("id").value,
         };
-        fetch("https://localhost:7172/Person", {
-          method: "POST",
-          body: JSON.stringify(users),
-          headers: {
-            Accept: "text/json",
-            "Content-Type": "application/json",
-          },
-        }).then((res) => {
-          if (res.ok) {
-            alert("Uzklausa sekminga");
-            window.location.replace("index.html");
-          } else {
-            alert("Uzklausa nesekminga");
-          }
-        });
+        submitData(users, "Person", "index.html");
       });
     </script>
   </body>

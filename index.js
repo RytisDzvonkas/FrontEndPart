@@ -1,6 +1,4 @@
 const state = {};
-//https://robust-safe-crafter.glitch.me/
-//https://localhost:7205/House/
 function fetchParameter(param) {
   fetch(`https://localhost:7172/${param}`)
     .then((res) => res.json())
@@ -63,24 +61,14 @@ function filterPerson(event) {
 }
 let base64String = "";
 
-function imageUploaded() {
-  var file = document.querySelector("input[type=file]")["files"][0];
-  var reader = new FileReader();
-  console.log("next");
-  reader.onload = function () {
-    base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-    imageBase64Stringsep = base64String;
-    // alert(imageBase64Stringsep);
-    console.log(base64String);
-  };
-  reader.readAsDataURL(file);
-}
-function displayString() {
-  console.log("Base64String about to be printed");
-  alert(base64String);
-}
-
 function CheckUser(user) {
+  fetch(`https://localhost:7172/${param}`)
+    .then((res) => res.json())
+    .then((data) => {
+      renderFilterPerson([...new Set(data.map((entry) => entry.user))]);
+      renderPersonCards(data);
+      state.user = data;
+    });
   if (user.status == 404) {
     document.getElementById("error-msg").innerText = "Bad login or password";
   } else {
@@ -91,6 +79,4 @@ function CheckUser(user) {
   }
 }
 
-document
-  .getElementById("filter-container")
-  .addEventListener("click", filterPerson);
+
